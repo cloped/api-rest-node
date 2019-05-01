@@ -8,6 +8,23 @@ services:
     container_name: api-rest
     volumes: 
       - '.:/usr/src/app/'
+      - /usr/src/app/node_modules/
     ports: 
       - 3333:3333
     command: yarn start
+    links:
+      - mongo
+    networks:
+      - backend
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - '27017:27017'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge

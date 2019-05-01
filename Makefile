@@ -1,9 +1,9 @@
 build:
 	docker-compose build
-	docker-compose run --rm api yarn
+	# docker-compose run --rm api yarn
 
 start:
-	docker-compose up
+	docker-compose up -d
 
 stop:
 	docker-compose stop
