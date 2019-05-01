@@ -2,15 +2,20 @@ const Payment = require('../database/payment')
 
 module.exports = function (app) {
   app.get('/pagamentos', function (req, res) {
-    Payment.find()
-      .then(payments => {
-        res.send(payments);
+
+    app.config.databaseConnection(() => {
+      return new Promise((resolve, reject) => {
+        Payment.find()
+          .then(payments => {
+            res.send(payments);
+            resolve();
+          });
       });
+    });
   });
 
   app.post('/pagamentos/pagamento', function (req, res) {
     const payment = req.body;
-
     const newPayment = new Payment({
       forma_de_pagamento: payment.forma_de_pagamento,
       valor: payment.valor,
@@ -20,9 +25,14 @@ module.exports = function (app) {
       data: new Date,
     });
 
-    console.log(newPayment)
-
-    newPayment.save()
-      .then(item => res.send(newPayment));
+    app.config.databaseConnection(() => {
+      return new Promise((resolve, reject) => {
+        newPayment.save()
+          .then(item => {
+            res.send(newPayment);
+            resolve();
+          });
+      });
+    });
   });
 }
