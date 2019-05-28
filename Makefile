@@ -1,6 +1,6 @@
 build:
 	docker-compose build
-	# docker-compose run --rm api yarn
+	docker-compose run --rm --no-deps api yarn
 
 start:
 	docker-compose up -d

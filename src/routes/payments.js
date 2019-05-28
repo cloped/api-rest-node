@@ -1,20 +1,16 @@
-const Payment = require('../database/payment')
+const Payment = require('../database/payment');
+const _ = require('lodash');
 
 module.exports = function (app) {
-  app.get('/pagamentos', function (req, res) {
-
-    app.config.databaseConnection(() => {
-      return new Promise((resolve, reject) => {
-        Payment.find()
-          .then(payments => {
-            res.send(payments);
-            resolve();
-          });
+  app.get('/payments', function (req, res) {
+    Payment.find()
+      .then(payments => {
+        res.send(payments);
+        console.log('Retrieved all payments!')
       });
-    });
   });
 
-  app.post('/pagamentos/pagamento', function (req, res) {
+  app.post('/payments/payment', function (req, res) {
     const payment = req.body;
     const newPayment = new Payment({
       forma_de_pagamento: payment.forma_de_pagamento,
@@ -25,14 +21,44 @@ module.exports = function (app) {
       data: new Date,
     });
 
-    app.config.databaseConnection(() => {
-      return new Promise((resolve, reject) => {
-        newPayment.save()
-          .then(item => {
-            res.send(newPayment);
-            resolve();
-          });
+    newPayment.save()
+      .then(item => {
+        res.send(newPayment);
+        console.log('Saved a payment!')
       });
-    });
+  });
+
+  app.put('/payments/payment/:paymentId', function (req, res) {
+    const { paymentId } = req.params;
+    const { forma_de_pagamento, valor, moeda, descricao, status, date } = req.body;
+    let update = { forma_de_pagamento, valor, moeda, descricao, status, date };
+    update = _.pickBy(update, _.identity);
+
+    Payment.findByIdAndUpdate(paymentId, update)
+      .then(item => {
+        response = {
+          'status': '200',
+          'updatedId': paymentId
+        }
+
+        res.send(_.merge(response, item));
+        console.log('Updated the payment ', paymentId, '!');
+      });
+  });
+
+  app.delete('/payments/payment/:paymentId', function (req, res) {
+    const { paymentId } = req.params;
+    let response;
+
+    Payment.findByIdAndDelete(paymentId)
+      .then(item => {
+        response = {
+          'status': '200',
+          'removedItemId': paymentId
+        }
+
+        res.send(response);
+        console.log('Deleted the payment ', paymentId, '!');
+      })
   });
 }
