@@ -1,0 +1,128 @@
+{
+	"info": {
+		"_postman_id": "b196a256-f899-434e-94ac-c47f88420184",
+		"name": "api-rest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Payments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3333/payments",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create one Payment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"forma_de_pagamento\": \"lerolero\",\n\t\"valor\": 1.50,\n\t\"moeda\": \"zzz\",\n\t\"descricao\": \"uma descricao\"\n}\n"
+				},
+				"url": {
+					"raw": "localhost:3333/payments/payment",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"payments",
+						"payment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3333/payments/payment/:paymentId",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3333/payments/payment/:paymentId",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"payments",
+						"payment",
+						":paymentId"
+					],
+					"variable": [
+						{
+							"key": "paymentId",
+							"value": "5cecaae486c8e5006e54f433"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3333/payments/payment/:paymentId",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"moeda\": \"aaaaa\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3333/payments/payment/:paymentId",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"payments",
+						"payment",
+						":paymentId"
+					],
+					"variable": [
+						{
+							"key": "paymentId",
+							"value": "5cecaaf886c8e5006e54f434"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
