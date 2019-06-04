@@ -10,7 +10,6 @@ module.exports = function () {
 
   consign({ cwd: path.join(__dirname) })
     .include('routes')
-    .then('config')
     .into(app);
 
   return app;
