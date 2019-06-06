@@ -6,123 +6,312 @@
 	},
 	"item": [
 		{
-			"name": "Get All Payments",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "localhost:3333/payments",
-					"host": [
-						"localhost"
-					],
-					"port": "3333",
-					"path": [
-						"payments"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create one Payment",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"forma_de_pagamento\": \"lerolero\",\n\t\"valor\": 1.50,\n\t\"moeda\": \"zzz\",\n\t\"descricao\": \"uma descricao\"\n}\n"
-				},
-				"url": {
-					"raw": "localhost:3333/payments/payment",
-					"host": [
-						"localhost"
-					],
-					"port": "3333",
-					"path": [
-						"payments",
-						"payment"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "localhost:3333/payments/payment/:paymentId",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "localhost:3333/payments/payment/:paymentId",
-					"host": [
-						"localhost"
-					],
-					"port": "3333",
-					"path": [
-						"payments",
-						"payment",
-						":paymentId"
-					],
-					"variable": [
-						{
-							"key": "paymentId",
-							"value": "5cecaae486c8e5006e54f433"
+			"name": "Establishments",
+			"item": [
+				{
+					"name": "Create establishment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"RU Setor Norte\",\n  \"description\": \"RU Setor Norte\",\n  \"pricing\": [\n    {\n      \"ticketType\": \"cafe\",\n      \"price\": 0.89,\n      \"coin\": \"R$\",\n      \"initTime\": \"07:00:00\",\n      \"endTime\": \"09:00:00\"\n    },\n    {\n      \"ticketType\": \"almoco\",\n      \"price\": 1.20,\n      \"coin\": \"R$\",\n      \"initTime\": \"11:00:00\",\n      \"endTime\": \"14:00:00\"\n    },\n    {\n      \"ticketType\": \"jantar\",\n      \"price\": 1.00,\n      \"coin\": \"R$\",\n      \"initTime\": \"17:00:00\",\n      \"endTime\": \"20:00:00\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/establishments/establishment",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"establishments",
+								"establishment"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Read all establishments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/establishments",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"establishments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read one establishment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/establishments/establishment/:establishmentId",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"establishments",
+								"establishment",
+								":establishmentId"
+							],
+							"variable": [
+								{
+									"key": "establishmentId",
+									"value": "5cf923128b7bd6027c9c4786"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update establishment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"RUuuuu\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/establishments/establishment/:establishmentId",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"establishments",
+								"establishment",
+								":establishmentId"
+							],
+							"variable": [
+								{
+									"key": "establishmentId",
+									"value": "5cf91369a8f972008255a29d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete establishment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/establishments/establishment/:establishmentid",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"establishments",
+								"establishment",
+								":establishmentid"
+							],
+							"variable": [
+								{
+									"key": "establishmentid",
+									"value": "5cf91369a8f972008255a29d"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "localhost:3333/payments/payment/:paymentId",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"moeda\": \"aaaaa\"\n}"
-				},
-				"url": {
-					"raw": "localhost:3333/payments/payment/:paymentId",
-					"host": [
-						"localhost"
-					],
-					"port": "3333",
-					"path": [
-						"payments",
-						"payment",
-						":paymentId"
-					],
-					"variable": [
-						{
-							"key": "paymentId",
-							"value": "5cecaaf886c8e5006e54f434"
+			"name": "Users",
+			"item": [
+				{
+					"name": "Create user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Fulano\",\n\t\"cpf\": \"987654321\",\n\t\"password\": \"00123123123\",\n\t\"moneyAmount\": [\n\t\t{\n\t\t  \"coinType\": \"R$\",\n\t\t  \"value\": \"0\"\n\t\t}\n\t],\n\t\"registrations\": [\n\t\t{\n\t\t\t\"registration\": \"2160000\",\n\t\t\t\"establishments\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"5cf91369a8f972008255a29d\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\t\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/users/user",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"users",
+								"user"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Read all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/users",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read one user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/users/user/:userId",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"users",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "5cf922e8736580026f28fcb0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"moneyAmount\": [\n\t\t{\n\t\t\t\"coinType\": \"R$\",\n\t\t\t\"value\": \"100\"\n\t\t}\n\t]\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/users/user/:userId",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"users",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "5cf922e8736580026f28fcb0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:3333/users/user/:userId",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"users",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "5cf922c70a24550262d12f9b"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }

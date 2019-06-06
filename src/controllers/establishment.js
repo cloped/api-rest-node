@@ -5,20 +5,26 @@ module.exports = {
   // CREATE
   postEstablishment: function (req, res) {
     const establishment = req.body;
-    const newEstablishment = new Establishment({
-      name: establishment.name,
-      description: establishment.description
+    const formatHelpDate = '01/01/2011'
+
+    // TODO validate all fields
+    establishment.pricing.forEach(price => {
+      if (isNaN(Date.parse(`${formatHelpDate} ${price.initTime}`)) || isNaN(Date.parse(`${formatHelpDate} ${price.endTime}`))) {
+        throw new Error;
+      }
     });
+
+    const newEstablishment = new Establishment({ ...establishment });
 
     newEstablishment.save()
       .then(item => {
-        res.send(newEstablishment);
+        res.send(item);
         console.log('Saved a establishment!')
       });
   },
 
   // READ
-  getEstablishment: function (req, res) {
+  getEstablishments: function (req, res) {
     Establishment.find()
       .then(establishments => {
         res.send(establishments);
@@ -26,12 +32,20 @@ module.exports = {
       });
   },
 
+  getEstablishment: function (req, res) {
+    const { establishmentId } = req.params;
+
+    Establishment.findById(establishmentId)
+      .then(establishment => {
+        res.send(establishment);
+        console.log('Retrieved one establishment!')
+      });
+  },
+
   // UPDATE
   putEstablishment: function (req, res) {
     const { establishmentId } = req.params;
-    const { name, description } = req.body;
-    let update = { name, description };
-    update = _.pickBy(update, _.identity);
+    const update = req.body;
 
     Establishment.findByIdAndUpdate(establishmentId, update)
       .then(item => {
@@ -40,7 +54,7 @@ module.exports = {
           'updatedId': establishmentId
         }
 
-        res.send(_.merge(response, item));
+        res.send(response);
         console.log('Updated the establishment ', establishmentId, '!');
       });
   },
