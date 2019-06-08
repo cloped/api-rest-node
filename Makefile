@@ -11,7 +11,7 @@ command = $(if $(filter prod, $(env)), docker-compose -f docker-compose.prod.yml
 
 build:
 	$(call command, build)
-	$(call command, run --no-deps --rm node yarn)
+	$(call command, run --no-deps --rm api yarn)
 
 start:
 	$(call command, up -d)
@@ -28,3 +28,6 @@ bash:
 	
 	# If u r not running the container
 	# docker-compose run api sh
+
+connect:
+	ssh ubuntu@ec2-54-209-181-18.compute-1.amazonaws.com
