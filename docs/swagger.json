@@ -73,7 +73,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EstablishmentMongoDB"
+                  "$ref": "#/components/schemas/Helper_Establishments"
                 }
               }
             }
@@ -106,7 +106,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Helper_Establishments"
+                  "$ref": "#/components/schemas/EstablishmentMongoDB"
                 }
               }
             }
@@ -269,12 +269,7 @@
       "Helper_Establishments": {
         "type": "array",
         "items": {
-          "type": "object",
-          "properties": {
-            "index": {
-              "$ref": "#/components/schemas/EstablishmentMongoDB"
-            }
-          }
+          "$ref": "#/components/schemas/EstablishmentMongoDB"
         }
       }
     }
