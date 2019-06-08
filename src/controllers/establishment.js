@@ -18,7 +18,7 @@ module.exports = {
 
     newEstablishment.save()
       .then(item => {
-        res.send(item);
+        res.status(201).send(item);
         console.log('Saved a establishment!')
       });
   },
@@ -27,7 +27,7 @@ module.exports = {
   getEstablishments: function (req, res) {
     Establishment.find()
       .then(establishments => {
-        res.send(establishments);
+        res.status(200).send(establishments);
         console.log('Retrieved all establishments!')
       });
   },
@@ -37,7 +37,7 @@ module.exports = {
 
     Establishment.findById(establishmentId)
       .then(establishment => {
-        res.send(establishment);
+        res.status(200).send(establishment);
         console.log('Retrieved one establishment!')
       });
   },
@@ -67,11 +67,10 @@ module.exports = {
     Establishment.findByIdAndDelete(establishmentId)
       .then(item => {
         response = {
-          'status': '200',
           'removedItemId': establishmentId
         }
 
-        res.send(response);
+        res.status(200).send(response);
         console.log('Deleted the establishment ', establishmentId, '!');
       })
   },

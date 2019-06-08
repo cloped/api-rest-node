@@ -1,0 +1,279 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Payzee API",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333/"
+    },
+    {
+      "url": "https://localhost:3333/"
+    }
+  ],
+  "paths": {
+    "/establishments/establishment/": {
+      "post": {
+        "tags": [
+          "establisments"
+        ],
+        "summary": "Create one establishment",
+        "description": "Create one establishment on database",
+        "operationId": "createEstablishment",
+        "requestBody": {
+          "description": "Establisment object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentMongoDB"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentMongoDB"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/EstablishmentMongoDB"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstablishmentMongoDB"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/establishments": {
+      "get": {
+        "tags": [
+          "establisments"
+        ],
+        "summary": "Read all establishments",
+        "description": "Read all establishments registered on database",
+        "operationId": "readAllEstablishments",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstablishmentMongoDB"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-swagger-router-controller": "establisments"
+    },
+    "/establishments/establishment/{establishmentId}": {
+      "get": {
+        "tags": [
+          "establisments"
+        ],
+        "summary": "Read one establishment",
+        "description": "Read one establishments registered on database",
+        "operationId": "readEstablishment",
+        "parameters": [
+          {
+            "name": "establishmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Helper_Establishments"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "establisments"
+        ],
+        "summary": "Update one establishment",
+        "description": "Update one establishment on database",
+        "operationId": "updateEstablishment",
+        "parameters": [
+          {
+            "name": "establishmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Establisment object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Helper_Establishment"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Helper_Establishment"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Helper_Establishment"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "establisments"
+        ],
+        "summary": "Delete one establishment",
+        "description": "Delete one establishment from database",
+        "operationId": "deleteEstablishment",
+        "parameters": [
+          {
+            "name": "establishmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {}
+          }
+        }
+      },
+      "x-swagger-router-controller": "establisments"
+    }
+  },
+  "components": {
+    "schemas": {
+      "EstablishmentMongoDB": {
+        "required": [
+          "description",
+          "name",
+          "pricing"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "pricing": {
+            "type": "array",
+            "items": {
+              "required": [
+                "endTime",
+                "initTime",
+                "price",
+                "ticketType"
+              ],
+              "type": "object",
+              "properties": {
+                "price": {
+                  "type": "number"
+                },
+                "ticketType": {
+                  "type": "string"
+                },
+                "endTime": {
+                  "type": "string"
+                },
+                "initTime": {
+                  "type": "string"
+                },
+                "coin": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Helper_Establishment": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "pricing": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "price": {
+                  "type": "number"
+                },
+                "ticketType": {
+                  "type": "string"
+                },
+                "endTime": {
+                  "type": "string"
+                },
+                "initTime": {
+                  "type": "string"
+                },
+                "coin": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Helper_Establishments": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "index": {
+              "$ref": "#/components/schemas/EstablishmentMongoDB"
+            }
+          }
+        }
+      }
+    }
+  }
+}
