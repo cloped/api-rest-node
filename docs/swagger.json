@@ -6,6 +6,9 @@
   },
   "servers": [
     {
+      "url": "http://ec2-54-209-181-18.compute-1.amazonaws.com"
+    },
+    {
       "url": "http://localhost:3333/"
     },
     {
