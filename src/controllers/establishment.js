@@ -50,7 +50,6 @@ module.exports = {
     Establishment.findByIdAndUpdate(establishmentId, update)
       .then(item => {
         response = {
-          'status': '200',
           'updatedId': establishmentId
         }
 

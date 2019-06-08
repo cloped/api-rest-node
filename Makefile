@@ -1,19 +1,30 @@
+define set-variables-production
+	$(eval ENV := prod)
+endef
+
+ENV_DEFINITION := $(if \
+	$(filter prod, $(env)), \
+	$(call set-variables-production)\
+)
+
+command = $(if $(filter prod, $(env)), docker-compose -f docker-compose.prod.yml $(1), docker-compose -f docker-compose.dev.yml $(1))
+
 build:
-	docker-compose build
-	docker-compose run --rm --no-deps api yarn
+	$(call command, build)
+	$(call command, run --no-deps --rm node yarn)
 
 start:
-	docker-compose up -d
+	$(call command, up -d)
 
 stop:
-	docker-compose down
+	$(call command, down)
 
 logs:
-	docker-compose logs -f
+	$(call command, logs -f)
 
 bash:
 	# If u r running the container
-	docker-compose exec api sh
+	$(call command, exec api sh)
 	
 	# If u r not running the container
 	# docker-compose run api sh
