@@ -1,35 +1,28 @@
 const Establishment = require('../models/establishment');
+const EstablishmentDAO = require('../dao/establishmentDAO');
 const _ = require('lodash');
+const moment = require('moment');
 
 module.exports = {
   // CREATE
-  postEstablishment: function (req, res) {
-    const establishment = req.body;
-    const formatHelpDate = '01/01/2011'
+  postEstablishment: async function (req, res) {
+    const inputEstablishment = req.body;
+    // const configDate = '03-04-1992';
 
-    // TODO validate all fields
-    establishment.pricing.forEach(price => {
-      if (isNaN(Date.parse(`${formatHelpDate} ${price.initTime}`)) || isNaN(Date.parse(`${formatHelpDate} ${price.endTime}`))) {
-        throw new Error;
-      }
-    });
-
-    const newEstablishment = new Establishment({ ...establishment });
-
-    newEstablishment.save()
-      .then(item => {
-        res.status(201).send(item);
-        console.log('Saved a establishment!')
-      });
+    // inputEstablishment.pricing.forEach(element => {
+    //   element.initTime = moment(new Date(`${configDate} ${element.initTime}`)).format('HH:mm');
+    //   element.endTime = moment(new Date(`${configDate} ${element.endTime}`)).format('HH:mm');
+    // });
+    const newEstablishment = await EstablishmentDAO.createEstablishment(inputEstablishment);
+    res.status(201).send(newEstablishment);
+    console.log('Saved a establishment!');
   },
 
   // READ
-  getEstablishments: function (req, res) {
-    Establishment.find()
-      .then(establishments => {
-        res.status(200).send(establishments);
-        console.log('Retrieved all establishments!')
-      });
+  getEstablishments: async function (req, res) {
+    const establishments = await EstablishmentDAO.readEstablishments();
+    res.status(200).send(establishments);
+    console.log('Retrieved all establishments!');
   },
 
   getEstablishment: function (req, res) {

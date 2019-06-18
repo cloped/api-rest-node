@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"RU Setor Norte\",\n  \"description\": \"RU Setor Norte\",\n  \"pricing\": [\n    {\n      \"ticketType\": \"cafe\",\n      \"price\": 0.89,\n      \"coin\": \"R$\",\n      \"initTime\": \"07:00:00\",\n      \"endTime\": \"09:00:00\"\n    },\n    {\n      \"ticketType\": \"almoco\",\n      \"price\": 1.20,\n      \"coin\": \"R$\",\n      \"initTime\": \"11:00:00\",\n      \"endTime\": \"14:00:00\"\n    },\n    {\n      \"ticketType\": \"jantar\",\n      \"price\": 1.00,\n      \"coin\": \"R$\",\n      \"initTime\": \"17:00:00\",\n      \"endTime\": \"20:00:00\"\n    }\n  ]\n}"
+							"raw": "{\n  \"name\": \"RU Setor Norte\",\n  \"description\": \"RU Setor Norte\",\n  \"pricing\": [\n    {\n      \"ticketType\": \"cafe\",\n      \"price\": 0.89,\n      \"coin\": \"R$\",\n      \"initTime\": \"07:00\",\n      \"endTime\": \"09:00\"\n    },\n    {\n      \"ticketType\": \"almoco\",\n      \"price\": 1.20,\n      \"coin\": \"R$\",\n      \"initTime\": \"11:00\",\n      \"endTime\": \"14:00\"\n    },\n    {\n      \"ticketType\": \"jantar\",\n      \"price\": 1.00,\n      \"coin\": \"R$\",\n      \"initTime\": \"17:00\",\n      \"endTime\": \"20:00\"\n    }\n  ]\n}"
 						},
 						"url": {
 							"raw": "localhost:3333/establishments/establishment",
@@ -274,7 +274,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "5cf922e8736580026f28fcb0"
+									"value": "5d01dfee6b19dc005aa4b3e0"
 								}
 							]
 						}
@@ -306,6 +306,41 @@
 									"key": "userId",
 									"value": "5cf922c70a24550262d12f9b"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Checkout",
+			"item": [
+				{
+					"name": "Create checkout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"establishmentId\": \"5d027e8535a60700c408de82\",\n\t\"userId\": \"5d01dfee6b19dc005aa4b3e0\"\n}"
+						},
+						"url": {
+							"raw": "localhost:3333/checkouts/checkout",
+							"host": [
+								"localhost"
+							],
+							"port": "3333",
+							"path": [
+								"checkouts",
+								"checkout"
 							]
 						}
 					},

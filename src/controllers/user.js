@@ -4,8 +4,6 @@ const _ = require('lodash');
 module.exports = {
   // CREATE
   postUser: function (req, res) {
-    const user = req.body;
-
     const newUser = new User({ ...req.body });
 
     newUser.save()
@@ -43,7 +41,6 @@ module.exports = {
     User.findByIdAndUpdate(userId, update)
       .then(item => {
         response = {
-          'status': '200',
           'updatedId': userId
         }
 

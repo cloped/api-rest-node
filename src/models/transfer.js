@@ -1,18 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const CheckoutSchema = new Schema({
-  userId: {
+const TransferSchema = new Schema({
+  providerId: {
     type: String,
     required: true,
   },
-  establishmentId: {
+  recipientId: {
     type: String,
     required: true,
   },
-  timeNow: {
+  value: {
     type: String,
     required: true,
+  },
+  coinType: {
+    type: String,
+    required: false,
   },
   timeStamp: {
     type: Date,
@@ -20,4 +24,4 @@ const CheckoutSchema = new Schema({
   }
 });
 
-module.exports = Checkout = mongoose.model('checkout', CheckoutSchema);
+module.exports = Checkout = mongoose.model('checkout', TransferSchema);
