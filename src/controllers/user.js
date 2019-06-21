@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const UserDAO = require('../dao/userDAO')
 const _ = require('lodash');
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
 
     newUser.save()
       .then(item => {
-        res.send(newUser);
+        res.status(201).send(newUser);
         console.log('Saved a user!')
       });
   },
@@ -17,7 +18,7 @@ module.exports = {
   getUsers: function (req, res) {
     User.find()
       .then(users => {
-        res.send(users);
+        res.status(200).send(users);
         console.log('Retrieved all users!')
       });
   },
@@ -27,7 +28,7 @@ module.exports = {
 
     User.findById(userId)
       .then(user => {
-        res.send(user);
+        res.status(200).send(user);
         console.log('Retrieved one user!')
       });
   },
@@ -44,7 +45,7 @@ module.exports = {
           'updatedId': userId
         }
 
-        res.send(response);
+        res.status(200).send(response);
         console.log('Updated the user ', userId, '!');
       });
   },
@@ -61,8 +62,25 @@ module.exports = {
           'removedItemId': userId
         }
 
-        res.send(response);
+        res.status(200).send(response);
         console.log('Deleted the user ', userId, '!');
       })
+  },
+
+  // MISC
+  checkUser: async function (req, res) {
+    const { cpf, password } = req.body;
+
+    try {
+      const user = await User.findOne({ cpf });
+
+      if (password === user.password) {
+        res.status(200).send({ 'ok': 'ok' });
+      } else {
+        res.status(400).send({ error: 'Invalid input' });
+      }
+    } catch (e) {
+      res.status(500).send({ error: 'Internal server error' });
+    }
   },
 }

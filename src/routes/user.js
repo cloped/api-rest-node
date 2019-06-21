@@ -6,4 +6,5 @@ module.exports = function (app) {
   app.post('/users/user', UserController.postUser);
   app.put('/users/user/:userId', UserController.putUser);
   app.delete('/users/user/:userId', UserController.deleteUser);
+  app.post('/users/user/check', UserController.checkUser);
 }

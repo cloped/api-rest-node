@@ -46,7 +46,7 @@ module.exports = {
           'updatedId': establishmentId
         }
 
-        res.send(response);
+        res.status(200).send(response);
         console.log('Updated the establishment ', establishmentId, '!');
       });
   },
