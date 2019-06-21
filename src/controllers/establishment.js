@@ -4,28 +4,23 @@ const _ = require('lodash');
 const moment = require('moment');
 
 module.exports = {
-  // CREATE
-  postEstablishment: async function (req, res) {
+  createEstablishment: async function (req, res) {
     const inputEstablishment = req.body;
-    // const configDate = '03-04-1992';
 
-    // inputEstablishment.pricing.forEach(element => {
-    //   element.initTime = moment(new Date(`${configDate} ${element.initTime}`)).format('HH:mm');
-    //   element.endTime = moment(new Date(`${configDate} ${element.endTime}`)).format('HH:mm');
-    // });
     const newEstablishment = await EstablishmentDAO.createEstablishment(inputEstablishment);
     res.status(201).send(newEstablishment);
+
     console.log('Saved a establishment!');
   },
 
-  // READ
-  getEstablishments: async function (req, res) {
+  readEstablishments: async function (req, res) {
     const establishments = await EstablishmentDAO.readEstablishments();
     res.status(200).send(establishments);
+
     console.log('Retrieved all establishments!');
   },
 
-  getEstablishment: function (req, res) {
+  readEstablishment: function (req, res) {
     const { establishmentId } = req.params;
 
     Establishment.findById(establishmentId)
@@ -35,8 +30,7 @@ module.exports = {
       });
   },
 
-  // UPDATE
-  putEstablishment: function (req, res) {
+  updateEstablishment: function (req, res) {
     const { establishmentId } = req.params;
     const update = req.body;
 
@@ -51,7 +45,6 @@ module.exports = {
       });
   },
 
-  // DELETE
   deleteEstablishment: function (req, res) {
     const { establishmentId } = req.params;
     let response;

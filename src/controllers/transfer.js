@@ -1,35 +1,49 @@
 const UserDAO = require('../dao/userDAO');
+const transactionDAO = require('../dao/transactionDAO');
+
+const moment = require('moment');
 
 module.exports = {
-  // CREATE
-  postTransfer: async function (req, res) {
+  createTransfer: async function (req, res) {
     const { providerId, recipientId } = req.params;
-    const { value, coinType } = req.body;
+    const { value, coinType, type, timestamp } = req.body;
 
     const providerUser = await UserDAO.readUser(providerId);
     const recipientUser = await UserDAO.readUser(recipientId);
 
-    await UserDAO.updateUser(providerId, {
-      moneyAmount: [
-        {
-          value: providerUser.moneyAmount[0].value - value,  
-          coinType: 'R$',
-        }
-      ]
-    });
+    if (providerUser.moneyAmount[0].value >= value) {
+      await UserDAO.updateUser(providerId, {
+        moneyAmount: [
+          {
+            value: providerUser.moneyAmount[0].value - value,
+            coinType: 'R$',
+          }
+        ]
+      });
 
-    await UserDAO.updateUser(recipientId, {
-      moneyAmount: [
-        {
-          value: recipientUser.moneyAmount[0].value + value,  
-          coinType: 'R$',
-        }
-      ]
-    });
+      await UserDAO.updateUser(recipientId, {
+        moneyAmount: [
+          {
+            value: recipientUser.moneyAmount[0].value + value,
+            coinType: 'R$',
+          }
+        ]
+      });
 
-    const providerUpdated = await UserDAO.readUser(providerId);
-    const recipientUpdated = await UserDAO.readUser(recipientId);
+      const newTransaction = {
+        providerId,
+        recipientId,
+        value,
+        coinType,
+        timestamp,
+        type,
+      }
 
-    res.status(201).send({'ok': 'ok'});
+      await transactionDAO.createTransaction(newTransaction);
+
+      res.status(201).send({ 'ok': 'ok' });
+    } else {
+      res.status(400).send({ 'Error': 'Invalid input' })
+    }
   },
 }

@@ -8,16 +8,15 @@ const minutesOfDay = function (m) {
 }
 
 module.exports = {
-  // CREATE
-  postCheckout: async function (req, res) {
-    const timeStamp = moment('12:00', 'HH:mm');
+  createCheckout: async function (req, res) {
+    const timestamp = moment('12:00', 'HH:mm');
     const { establishmentId, userId } = req.params;
     let selectedPrice;
 
     const establishment = await EstablishmentDAO.readEstablishment(establishmentId);
     establishment.pricing.forEach(element => {
-      if (minutesOfDay(moment(element.initTime, 'HH:mm')) < minutesOfDay(timeStamp)
-        && minutesOfDay(moment(element.endTime, 'HH:mm')) > minutesOfDay(timeStamp)) {
+      if (minutesOfDay(moment(element.initTime, 'HH:mm')) < minutesOfDay(timestamp)
+        && minutesOfDay(moment(element.endTime, 'HH:mm')) > minutesOfDay(timestamp)) {
         selectedPrice = element.price;
       }
     });

@@ -7,7 +7,7 @@ app.listen(3333, function () {
   // Connect to MongoDB
   mongoose
     .connect(
-      'mongodb://mongo:27017/docker-node-mongo',
+      'mongodb://mongo:27017/mongo-payzee',
       { useNewUrlParser: true }
     )
     .then(() => console.log('MongoDB Connected'))

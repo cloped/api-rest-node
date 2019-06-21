@@ -1,8 +1,8 @@
 const Establishment = require('../models/establishment');
 
 module.exports = {
-  createEstablishment: function (inputEstablishment) {
-    const newEstablishment = new Establishment({ ...inputEstablishment });
+  createEstablishment: function (inupdateEstablishment) {
+    const newEstablishment = new Establishment({ ...inupdateEstablishment });
     return newEstablishment.save();
   },
 

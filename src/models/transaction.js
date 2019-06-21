@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TransferSchema = new Schema({
+const TransactionSchema = new Schema({
   providerId: {
     type: String,
     required: true,
@@ -18,10 +18,14 @@ const TransferSchema = new Schema({
     type: String,
     required: false,
   },
-  timeStamp: {
-    type: Date,
+  timestamp: {
+    type: String,
     requirec: true,
-  }
+  },
+  type: {
+    type: String,
+    required: true,
+  },
 });
 
-module.exports = Checkout = mongoose.model('checkout', TransferSchema);
+module.exports = Transaction = mongoose.model('transaction', TransactionSchema);
