@@ -389,10 +389,10 @@
 			]
 		},
 		{
-			"name": "Transfer",
+			"name": "Transaction",
 			"item": [
 				{
-					"name": "Create Transfer",
+					"name": "Create Transaction (type transfer)",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -405,27 +405,76 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"value\": 1.2,\n\t\"coinType\": \"R$\"\n}"
+							"raw": "{\n\t\"value\": 1.72,\n\t\"coinType\": \"R$\",\n\t\"type\": \"transfer\",\n\t\"timestamp\": \"2019-03-21\"\n}"
 						},
 						"url": {
-							"raw": "{{host_url}}/transfers/transfer/:providerId/:recipientId",
+							"raw": "{{host_url}}/transactions/transaction/:providerId/:recipientId",
 							"host": [
 								"{{host_url}}"
 							],
 							"path": [
-								"transfers",
-								"transfer",
+								"transactions",
+								"transaction",
 								":providerId",
 								":recipientId"
 							],
 							"variable": [
 								{
 									"key": "providerId",
-									"value": "5d01dfee6b19dc005aa4b3e0"
+									"value": "5d0d503ba834cf013bfe3f21"
 								},
 								{
 									"key": "recipientId",
-									"value": "5d08edeb198c42015ff4a9db"
+									"value": "5d0d504ba834cf013bfe3f22"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host_url}}/transactions",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read user transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host_url}}/transactions/:userId",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"transactions",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "5d0d503ba834cf013bfe3f21"
 								}
 							]
 						}
