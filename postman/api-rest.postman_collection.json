@@ -179,11 +179,10 @@
 							"raw": "{\n\t\"name\": \"Fulano\",\n\t\"cpf\": \"987654321\",\n\t\"password\": \"00123123123\",\n\t\"moneyAmount\": [\n\t\t{\n\t\t  \"coinType\": \"R$\",\n\t\t  \"value\": \"0\"\n\t\t}\n\t],\n\t\"registrations\": [\n\t\t{\n\t\t\t\"registration\": \"2160000\",\n\t\t\t\"establishments\": [\n\t\t\t\t{\n\t\t\t\t\t\"id\": \"5cf91369a8f972008255a29d\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t]\t\n}"
 						},
 						"url": {
-							"raw": "localhost:3333/users/user",
+							"raw": "{{host_url}}/users/user",
 							"host": [
-								"localhost"
+								"{{host_url}}"
 							],
-							"port": "3333",
 							"path": [
 								"users",
 								"user"
@@ -202,11 +201,10 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:3333/users",
+							"raw": "{{host_url}}/users",
 							"host": [
-								"localhost"
+								"{{host_url}}"
 							],
-							"port": "3333",
 							"path": [
 								"users"
 							]
@@ -310,6 +308,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Check User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cpf\": \"987654321\",\n\t\"password\": \"00123123123\"\n}"
+						},
+						"url": {
+							"raw": "{{host_url}}/users/user/check",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"users",
+								"user",
+								"check"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -330,17 +358,75 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"establishmentId\": \"5d027e8535a60700c408de82\",\n\t\"userId\": \"5d01dfee6b19dc005aa4b3e0\"\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:3333/checkouts/checkout",
+							"raw": "localhost:3333/checkouts/checkout/:userId/:establishmentId",
 							"host": [
 								"localhost"
 							],
 							"port": "3333",
 							"path": [
 								"checkouts",
-								"checkout"
+								"checkout",
+								":userId",
+								":establishmentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "5d01dfee6b19dc005aa4b3e0"
+								},
+								{
+									"key": "establishmentId",
+									"value": "5d027e8535a60700c408de82"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transfer",
+			"item": [
+				{
+					"name": "Create Transfer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"value\": 1.2,\n\t\"coinType\": \"R$\"\n}"
+						},
+						"url": {
+							"raw": "{{host_url}}/transfers/transfer/:providerId/:recipientId",
+							"host": [
+								"{{host_url}}"
+							],
+							"path": [
+								"transfers",
+								"transfer",
+								":providerId",
+								":recipientId"
+							],
+							"variable": [
+								{
+									"key": "providerId",
+									"value": "5d01dfee6b19dc005aa4b3e0"
+								},
+								{
+									"key": "recipientId",
+									"value": "5d08edeb198c42015ff4a9db"
+								}
 							]
 						}
 					},
