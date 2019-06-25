@@ -75,7 +75,7 @@ module.exports = {
       const user = await User.findOne({ cpf });
 
       if (password === user.password) {
-        res.status(200).send({ 'ok': 'ok' });
+        res.status(200).send(user);
       } else {
         res.status(400).send({ error: 'Invalid input' });
       }
