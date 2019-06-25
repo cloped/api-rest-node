@@ -10,7 +10,7 @@ services:
       - .:/usr/src/app/
     ports: 
       - 80:3333
-    command: yarn start
+    command: yarn start:prod
     depends_on:
       - mongo
     networks:

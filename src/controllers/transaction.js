@@ -9,8 +9,6 @@ module.exports = {
 
     if (type === 'transfer') {
       TransferController.createTransfer(req, res);
-    } else if (type === 'payment') {
-      PaymentController.createPayment(req, res);
     } else if (type === 'checkout') {
       CheckoutController.createCheckout(req, res);
     }
