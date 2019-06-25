@@ -33,6 +33,7 @@ module.exports = {
     });
     const updatedUser = await UserDAO.readUser(providerId);
 
-    res.status(202).send(updatedUser);
+    console.log('Created checkout');
+    res.status(201).send(updatedUser);
   },
 }
