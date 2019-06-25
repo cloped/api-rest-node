@@ -1,4 +1,6 @@
 const TransferController = require('./transfer');
+const PaymentController = require('./payment');
+const CheckoutController = require('./checkout');
 const TransactionDAO = require('../dao/transactionDAO');
 
 module.exports = {
@@ -7,6 +9,10 @@ module.exports = {
 
     if (type === 'transfer') {
       TransferController.createTransfer(req, res);
+    } else if (type === 'payment') {
+      PaymentController.createPayment(req, res);
+    } else if (type === 'checkout') {
+      CheckoutController.createCheckout(req, res);
     }
   },
 

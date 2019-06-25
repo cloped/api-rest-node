@@ -2,27 +2,17 @@ const UserDAO = require('../dao/userDAO');
 const transactionDAO = require('../dao/transactionDAO');
 
 module.exports = {
-  createTransfer: async function (req, res) {
+  createPayment: async function (req, res) {
     const { providerId, recipientId } = req.params;
     const { value, coinType, type, timestamp } = req.body;
 
     const providerUser = await UserDAO.readUser(providerId);
-    const recipientUser = await UserDAO.readUser(recipientId);
 
     if (providerUser.moneyAmount[0].value >= value) {
       await UserDAO.updateUser(providerId, {
         moneyAmount: [
           {
             value: providerUser.moneyAmount[0].value - value,
-            coinType: 'R$',
-          }
-        ]
-      });
-
-      await UserDAO.updateUser(recipientId, {
-        moneyAmount: [
-          {
-            value: recipientUser.moneyAmount[0].value + value,
             coinType: 'R$',
           }
         ]
