@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"RU Setor Norte\",\n  \"description\": \"RU Setor Norte\",\n  \"pricing\": [\n    {\n      \"ticketType\": \"cafe\",\n      \"price\": 0.89,\n      \"coin\": \"R$\",\n      \"initTime\": \"07:00\",\n      \"endTime\": \"09:00\"\n    },\n    {\n      \"ticketType\": \"almoco\",\n      \"price\": 1.20,\n      \"coin\": \"R$\",\n      \"initTime\": \"11:00\",\n      \"endTime\": \"14:00\"\n    },\n    {\n      \"ticketType\": \"jantar\",\n      \"price\": 1.00,\n      \"coin\": \"R$\",\n      \"initTime\": \"17:00\",\n      \"endTime\": \"20:00\"\n    },\n    {\n\t  \"ticketType\": \"viradao\",\n      \"price\": 1.78,\n      \"coin\": \"R$\",\n      \"initTime\": \"21:00\",\n      \"endTime\": \"23:59\"\n    }\n  ]\n}"
+							"raw": "{\n  \"name\": \"RU Setor Norte\",\n  \"description\": \"RU Setor Norte\",\n  \"pricing\": [\n    {\n      \"ticketType\": \"cafe\",\n      \"price\": 0.80,\n      \"coin\": \"R$\",\n      \"initTime\": \"07:00\",\n      \"endTime\": \"09:00\"\n    },\n    {\n      \"ticketType\": \"almoco\",\n      \"price\": 1.20,\n      \"coin\": \"R$\",\n      \"initTime\": \"11:00\",\n      \"endTime\": \"14:00\"\n    },\n    {\n      \"ticketType\": \"jantar\",\n      \"price\": 1.00,\n      \"coin\": \"R$\",\n      \"initTime\": \"17:00\",\n      \"endTime\": \"20:00\"\n    }\n  ]\n}"
 						},
 						"url": {
 							"raw": "localhost:3333/establishments/establishment",
@@ -104,7 +104,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"description\": \"RUuuuu\"\n}"
+							"raw": "{\n  \"pricing\": [\n        {\n            \"ticketType\": \"cafe\",\n            \"price\": 0.8,\n            \"coin\": \"R$\",\n            \"initTime\": \"07:00\",\n            \"endTime\": \"10:30\"\n        },\n        {\n            \"ticketType\": \"almoco\",\n            \"price\": 1.2,\n            \"coin\": \"R$\",\n            \"initTime\": \"11:00\",\n            \"endTime\": \"14:00\"\n        },\n        {\n            \"ticketType\": \"jantar\",\n            \"price\": 1,\n            \"coin\": \"R$\",\n            \"initTime\": \"17:00\",\n            \"endTime\": \"20:00\"\n        }\n    ]\n}"
 						},
 						"url": {
 							"raw": "localhost:3333/establishments/establishment/:establishmentId",
@@ -201,10 +201,11 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host_url}}/users",
+							"raw": "localhost:80/users",
 							"host": [
-								"{{host_url}}"
+								"localhost"
 							],
+							"port": "80",
 							"path": [
 								"users"
 							]
@@ -323,7 +324,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"cpf\": \"987654321\",\n\t\"password\": \"00123123123\"\n}"
+							"raw": "{\n\t\"cpf\": \"123\",\n\t\"password\": \"123\"\n}"
 						},
 						"url": {
 							"raw": "{{host_url}}/users/user/check",
@@ -358,7 +359,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"value\": 5.0,\n\t\"coinType\": \"R$\",\n\t\"type\": \"transfer\",\n\t\"timestamp\": \"2019-03-21\"\n}"
+							"raw": "{\n\t\"value\": 5.0,\n\t\"coinType\": \"R$\",\n\t\"type\": \"transfer\"\n}"
 						},
 						"url": {
 							"raw": "{{host_url}}/transactions/transaction/:providerId/:recipientId",
@@ -374,11 +375,11 @@
 							"variable": [
 								{
 									"key": "providerId",
-									"value": "5d0d504ba834cf013bfe3f22"
+									"value": "5d1214b68d763e002631c885"
 								},
 								{
 									"key": "recipientId",
-									"value": "5d0d503ba834cf013bfe3f21"
+									"value": "5d1214ce8d763e002631c886"
 								}
 							]
 						}
@@ -415,11 +416,11 @@
 							"variable": [
 								{
 									"key": "providerId",
-									"value": "5d0d504ba834cf013bfe3f22"
+									"value": "5d1214b68d763e002631c885"
 								},
 								{
 									"key": "recipientId",
-									"value": "5d1177225be1ee00d4635e57"
+									"value": "5d12146d8d763e002631c884"
 								}
 							]
 						}
@@ -440,7 +441,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"type\": \"checkout\",\n\t\"amount\": \"1.20\"\n}"
+							"raw": "{\n\t\"type\": \"payment\",\n\t\"amount\": \"10.20\"\n}"
 						},
 						"url": {
 							"raw": "{{host_url}}/transactions/payment/:userId",
@@ -455,7 +456,7 @@
 							"variable": [
 								{
 									"key": "userId",
-									"value": "5d0d503ba834cf013bfe3f21"
+									"value": "5d1215008d763e002631c889"
 								}
 							]
 						}
