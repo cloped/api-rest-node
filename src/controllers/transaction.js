@@ -6,7 +6,7 @@ const TransactionDAO = require('../dao/transactionDAO');
 module.exports = {
   createTransactionRedirect: function (req, res) {
     const { type } = req.body;
-
+    console.log('REDIRECT!', type);
     if (type === 'transfer') {
       TransferController.createTransfer(req, res);
     } else if (type === 'checkout') {

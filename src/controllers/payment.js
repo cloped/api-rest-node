@@ -29,7 +29,7 @@ module.exports = {
     const user = await UserDAO.readUser(userId);
 
     const formattedAmount = `${amount.replace(/\./g, '')}`;
-
+    console.log('Entering in payment');
     try {
       const responseOrder = await moip.order.create({
         ownId: uuidv1(),
@@ -48,6 +48,7 @@ module.exports = {
       });
 
       const orderId = responseOrder.body.id;
+      console.log('Created Order', orderId);
 
       try {
         const responsePayment = await moip.payment.create(orderId, {
@@ -73,8 +74,8 @@ module.exports = {
             }
           }
         });
-
         const paymentId = responsePayment.body.id;
+        console.log('Created Payment', paymentId);
 
         try {
           axios.get(`https://sandbox.moip.com.br/simulador/authorize?payment_id=${paymentId}&amount=${formattedAmount}`);
@@ -82,31 +83,27 @@ module.exports = {
           console.log('axios', e.message)
         }
 
-        if (user.moneyAmount[0].value >= parseFloat(amount)) {
-          await UserDAO.updateUser(userId, {
-            moneyAmount: [
-              {
-                value: user.moneyAmount[0].value - parseFloat(amount),
-                coinType: 'R$',
-              }
-            ]
-          });
+        await UserDAO.updateUser(userId, {
+          moneyAmount: [
+            {
+              value: user.moneyAmount[0].value + parseFloat(amount),
+              coinType: 'R$',
+            }
+          ]
+        });
 
-          const newTransaction = {
-            providerId: userId,
-            recipientId: 'payzee',
-            value: parseFloat(amount),
-            coinType: 'R$',
-            timestamp: momentTz().tz('America/Manaus').format('HH:mm'),
-            type,
-          }
-
-          await transactionDAO.createTransaction(newTransaction);
-
-          res.status(200).send({ ok: responsePayment });
-        } else {
-          throw new Error('Invalid Input');
+        const newTransaction = {
+          providerId: userId,
+          recipientId: 'payzee',
+          value: parseFloat(amount),
+          coinType: 'R$',
+          timestamp: momentTz().tz('America/Manaus').format('HH:mm'),
+          type,
         }
+
+        await transactionDAO.createTransaction(newTransaction);
+        console.log('Done payment');
+        res.status(200).send({ ok: responsePayment });
       } catch (e) {
         console.log(e.message)
         res.status(500).send({ 'pay': e.message });
