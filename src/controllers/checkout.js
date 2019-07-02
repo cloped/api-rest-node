@@ -25,8 +25,9 @@ module.exports = {
     });
 
     const user = await UserDAO.readUser(providerId);
-  
-    if (user.moneyAmount[0].value >= value) {
+    console.log(user);
+    //caralho eduardo kkkkkkkkk
+    if (user.moneyAmount[0].value >= selectedPrice) {
       await UserDAO.updateUser(providerId, {
         moneyAmount: [
           {
