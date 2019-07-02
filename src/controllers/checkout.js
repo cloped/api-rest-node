@@ -25,28 +25,33 @@ module.exports = {
     });
 
     const user = await UserDAO.readUser(providerId);
-    await UserDAO.updateUser(providerId, {
-      moneyAmount: [
-        {
-          value: user.moneyAmount[0].value - selectedPrice,
-          coinType: 'R$',
-        }
-      ]
-    });
-    const updatedUser = await UserDAO.readUser(providerId);
+  
+    if (user.moneyAmount[0].value >= value) {
+      await UserDAO.updateUser(providerId, {
+        moneyAmount: [
+          {
+            value: user.moneyAmount[0].value - selectedPrice,
+            coinType: 'R$',
+          }
+        ]
+      });
+      const updatedUser = await UserDAO.readUser(providerId);
 
-    const newTransaction = {
-      providerId,
-      recipientId,
-      value: selectedPrice,
-      coinType: 'R$',
-      timestamp: momentTz().tz('America/Manaus').format('HH:mm'),
-      type,
+      const newTransaction = {
+        providerId,
+        recipientId,
+        value: selectedPrice,
+        coinType: 'R$',
+        timestamp: momentTz().tz('America/Manaus').format('HH:mm'),
+        type,
+      }
+
+      await transactionDAO.createTransaction(newTransaction);
+
+      console.log('Done checkout');
+      res.status(201).send(updatedUser);
+    } else {
+      res.status(400).send({ 'Error': 'Invalid input' })
     }
-
-    await transactionDAO.createTransaction(newTransaction);
-
-    console.log('Done checkout');
-    res.status(201).send(updatedUser);
   },
 }
